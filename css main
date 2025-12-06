@@ -1,13 +1,26 @@
-/* css/styles.css */
+/* css/styles.css - Royal Edition */
 
-/* --- VARIABLES & RESET --- */
+/* --- 1. VARIABLES & SETUP --- */
 :root {
-    --primary-green: #0b3d26; /* Deep Emerald */
-    --secondary-green: #145e3b;
-    --royal-gold: #d4af37;
-    --light-cream: #f9f7f2;
-    --text-dark: #2c2c2c;
+    /* Palette */
+    --primary-green: #082f1e;     /* Darker, richer emerald */
+    --secondary-green: #145e3b;   /* Standard emerald */
+    --accent-green: #2e8b57;      /* Sea Green for highlights */
+    
+    /* The Gold Gradient - Makes it look expensive */
+    --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    --gold-flat: #d4af37;
+    
+    /* Backgrounds & Text */
+    --cream-bg: #f9f7f2;          /* Parchment feel */
     --white: #ffffff;
+    --text-dark: #1a1a1a;
+    --text-light: #555555;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-md: 0 8px 16px rgba(0,0,0,0.1);
+    --shadow-lg: 0 15px 30px rgba(0,0,0,0.15);
 }
 
 * {
@@ -16,45 +29,66 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-cream);
+    font-family: 'Lato', sans-serif; /* Clean modern font for reading */
+    background-color: var(--cream-bg);
     color: var(--text-dark);
-    line-height: 1.6;
+    line-height: 1.8; /* More breathing room for text */
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
-h1, h2, h3 {
-    font-family: 'Georgia', serif;
+/* --- 2. TYPOGRAPHY --- */
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif; /* Elegant Royal Font */
     color: var(--primary-green);
+    margin-bottom: 0.5em;
+    font-weight: 700;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-    transition: 0.3s;
+h1 { font-size: 3rem; letter-spacing: -0.5px; }
+h2 { font-size: 2.2rem; position: relative; display: inline-block; }
+p { margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--text-light); }
+
+/* Decorative underline for H2s */
+.section-title h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--gold-gradient);
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
-/* --- HEADER & NAV --- */
+/* --- 3. TOP BAR & NAVIGATION --- */
+.top-bar {
+    background-color: #000;
+    color: var(--gold-flat);
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
 header {
-    background-color: var(--primary-green);
-    color: var(--white);
-    border-bottom: 4px solid var(--royal-gold);
+    background: var(--primary-green);
+    /* Subtle texture overlay for the header */
+    background-image: linear-gradient(to bottom, rgba(8, 47, 30, 0.95), rgba(8, 47, 30, 1));
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.top-bar {
-    background-color: #052617;
-    text-align: center;
-    padding: 5px 0;
-    font-size: 0.85rem;
-    color: var(--royal-gold);
-    font-style: italic;
+    border-bottom: 3px solid #b38728;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(10px); /* Glass effect */
 }
 
 .nav-container {
@@ -62,7 +96,7 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 5%;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
@@ -70,182 +104,260 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
+    transition: transform 0.3s ease;
 }
 
+.logo:hover { transform: scale(1.02); }
+
 .logo img {
-    height: 50px;
-    border: 2px solid var(--royal-gold);
+    height: 55px;
+    width: 55px;
     border-radius: 50%;
+    border: 2px solid var(--gold-flat);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    object-fit: cover;
 }
 
 .logo-text h1 {
+    font-size: 1.4rem;
     color: var(--white);
-    font-size: 1.5rem;
-    margin-bottom: -5px;
+    margin: 0;
+    line-height: 1.2;
 }
 
 .logo-text span {
-    font-size: 0.8rem;
-    color: var(--royal-gold);
-    text-transform: uppercase;
+    font-size: 0.75rem;
+    color: #fcf6ba;
     letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: 'Lato', sans-serif;
 }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 25px;
+nav ul { display: flex; list-style: none; gap: 30px; }
+
+nav a {
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 400;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 5px;
 }
 
-nav a:hover, nav a.active {
-    color: var(--royal-gold);
+/* Animated Underline Effect */
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--gold-flat);
+    transition: width 0.3s;
 }
 
+nav a:hover::after, nav a.active::after { width: 100%; }
+nav a:hover, nav a.active { color: var(--white); }
+
+/* Gold Button CTA */
 .btn-gold {
-    background-color: var(--royal-gold);
+    background: var(--gold-gradient);
     color: var(--primary-green);
-    padding: 8px 16px;
-    border-radius: 4px;
-    font-weight: bold;
+    padding: 10px 25px;
+    border-radius: 30px; /* Pill shape */
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .btn-gold:hover {
-    background-color: #b59328;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+    filter: brightness(1.1);
 }
 
-/* --- HERO SECTION (Home Page) --- */
+/* --- 4. HERO SECTION --- */
 .hero {
-    /* Note: We use ../assets because the CSS file is inside the 'css' folder */
-    background: linear-gradient(rgba(11, 61, 38, 0.8), rgba(11, 61, 38, 0.8)), url('../assets/hero.jpg'); 
+    /* Use a gradient overlay to make text readable */
+    background: linear-gradient(rgba(5, 25, 15, 0.6), rgba(5, 25, 15, 0.8)), url('../assets/hero.jpg');
     background-size: cover;
     background-position: center;
-    height: 80vh;
+    background-attachment: fixed; /* Parallax Effect */
+    height: 75vh;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--white);
-    padding: 0 20px;
+    padding: 20px;
+    clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%); /* Cool shape at bottom */
+    margin-bottom: 50px;
 }
 
-/* Fallback if user doesn't have an image yet */
-.hero.no-img {
-    background: linear-gradient(rgba(11, 61, 38, 1), rgba(11, 61, 38, 0.8));
+.hero-content {
+    max-width: 800px;
+    animation: fadeUp 1s ease-out; /* Animation on load */
 }
 
-.hero-content h2 {
-    font-size: 3rem;
-    color: var(--royal-gold);
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    max-width: 700px;
-    margin: 0 auto 30px;
+.hero h2 {
+    font-size: 4rem;
+    color: var(--white);
+    /* Gold text stroke effect */
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
 }
 
 .arabic-motto {
-    font-family: 'Arial', sans-serif;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-    color: var(--white);
+    font-family: 'Times New Roman', serif;
+    font-size: 1.8rem;
+    color: #fcf6ba;
+    margin-bottom: 20px;
 }
 
-/* --- GENERAL PAGE CONTENT --- */
+/* --- 5. CONTENT & CARDS --- */
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
-    flex: 1; /* Pushes footer down */
+    padding: 0 20px 80px;
+    flex: 1;
 }
 
 .section-title {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
-.section-title h2 {
-    font-size: 2.2rem;
-    display: inline-block;
-    border-bottom: 3px solid var(--royal-gold);
-    padding-bottom: 10px;
-}
-
-/* --- CARDS & GRID --- */
-.gov-grid {
+.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
 }
 
 .card {
     background: var(--white);
-    border-top: 5px solid var(--royal-gold);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    padding: 30px;
-    text-align: center;
-    transition: transform 0.3s;
+    padding: 40px 30px;
+    border-radius: 8px;
+    /* Expensive Shadow */
+    box-shadow: var(--shadow-sm);
+    border-top: 5px solid var(--gold-flat);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    cursor: pointer;
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
 }
+
+.card::before {
+    /* Subtle shimmer effect on hover */
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    transition: 0.5s;
+}
+.card:hover::before { left: 100%; }
 
 .card i {
-    font-size: 2.5rem;
-    color: var(--primary-green);
+    font-size: 3rem;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 25px;
+    display: inline-block;
+}
+
+.card h3 { font-size: 1.5rem; color: var(--primary-green); }
+
+/* --- 6. FORMS & TABLES --- */
+input, textarea {
+    width: 100%;
+    padding: 15px;
     margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fcfcfc;
+    font-family: 'Lato', sans-serif;
+    transition: 0.3s;
 }
 
-/* --- FOOTER --- */
-footer {
-    background-color: #052617;
-    color: #aaa;
-    padding: 50px 20px 20px;
-    font-size: 0.9rem;
-    margin-top: auto;
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold-flat);
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
 }
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 40px;
-    max-width: 1100px;
-    margin: 0 auto 40px;
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    margin-top: 20px;
+    background: white;
 }
 
-.footer-col h4 {
+th {
+    background-color: var(--primary-green);
     color: var(--white);
-    margin-bottom: 20px;
-    border-left: 3px solid var(--royal-gold);
-    padding-left: 10px;
+    padding: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
 }
 
-.footer-col ul {
-    list-style: none;
+td {
+    padding: 18px;
+    border-bottom: 1px solid #eee;
+    color: var(--text-dark);
 }
 
-.footer-col ul li {
-    margin-bottom: 10px;
-}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background-color: #f9fdfa; }
 
-.copyright {
+/* --- 7. FOOTER --- */
+footer {
+    background-color: #031a10; /* Very dark green */
+    color: #aaa;
+    padding: 60px 20px 20px;
+    margin-top: auto;
+    border-top: 4px solid var(--gold-flat);
     text-align: center;
-    border-top: 1px solid #333;
-    padding-top: 20px;
+    font-size: 0.9rem;
+}
+
+footer p { margin-bottom: 10px; color: #888; }
+footer a { color: var(--gold-flat); }
+
+/* --- 8. ANIMATIONS --- */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-    .nav-container {
-        flex-direction: column;
-        gap: 20px;
-    }
-    nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
+    .nav-container { flex-direction: column; gap: 20px; }
+    nav ul { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    .hero h2 { font-size: 2.5rem; }
+    .hero { height: 60vh; clip-path: none; }
+    .card { padding: 30px 20px; }
 }
